@@ -23,8 +23,7 @@ public class User implements UserDetails {
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
     public User() {
@@ -114,5 +113,13 @@ public class User implements UserDetails {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getRolesString() {
+        StringBuilder str = new StringBuilder();
+        for (Role role : roles) {
+            str.append(role.getName()).append(" ");
+        }
+        return str.toString();
     }
 }

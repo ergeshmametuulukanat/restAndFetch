@@ -1,8 +1,9 @@
 package com.company.service;
 
-import com.company.dao.UserDao;
+import com.company.repository.UserRepository;
 import com.company.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,35 +12,34 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserDao userDao;
+    private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
-    public List<User> getAllUsers() {
-        return userDao.getAllUsers();
+    public List<User> findAll() {
+        return (List<User>) userRepository.findAll();
     }
 
     @Override
-    public void add(User user) {
-        userDao.add(user);
+    public void save(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
     }
 
     @Override
     public void delete(User user) {
-        userDao.delete(user);
+        userRepository.delete(user);
     }
 
     @Override
-    public void update(User user) {
-        userDao.update(user);
-    }
-
-    @Override
-    public User getById(long id) {
-        return userDao.getById(id);
+    public User findById(long id) {
+        return userRepository.findById(id).orElse(null);
     }
 
     @Override
     public User findByUsername(String username) {
-        return userDao.findByUsername(username);
+        return userRepository.findByName(username);
     }
 }
