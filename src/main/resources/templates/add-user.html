@@ -29,7 +29,7 @@
                         <a class="nav-link active" th:href="@{/admin}" >Admin</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/user}" >User</a>
+                        <a class="nav-link" th:href="@{/user}">User</a>
                     </li>
                 </ul>
                 <hr class="d-sm-none">
@@ -41,10 +41,10 @@
                 </h1>
                 <ul class="nav nav-tabs card-header-tabs m-0 row">
                     <li class="nav-item">
-                        <a class="nav-link active" th:href="@{/user}" data-toggle="tab">Users table</a>
+                        <a class="nav-link " th:href="@{/user}" data-toggle="tab">Users table</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/admin/newUser}" data-toggle="tab">New User</a>
+                        <a class="nav-link active" th:href="@{/admin/newUser}" data-toggle="tab">New User</a>
                     </li>
                 </ul>
                 <div></div>
@@ -86,10 +86,12 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="sel2"> <a>Roles</a></label>
-                                    <select multiple class="form-control mb-3" size="2" id="sel2" name="roles1">
-                                        <option value="ADMIN">ADMIN</option>
-                                        <option value="USER">USER</option>
+                                    <label th:for="roles"><a>Roles</a></label>
+                                    <select multiple class="form-control mb-3" size="2" name="roles">
+                                        <option th:each="role:${allRoles}"
+                                                th:value="${role.id}"
+                                                th:text="${role.name}">
+                                        </option>
                                     </select>
                                 </div>
 
