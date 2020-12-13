@@ -17,7 +17,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest,
                                         HttpServletResponse httpServletResponse,
-                                        Authentication authentication) throws IOException, ServletException {
+                                        Authentication authentication) throws IOException {
 
         httpServletResponse.sendRedirect(getRedirectUrl(authentication));
     }
@@ -28,8 +28,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
                 .stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toSet());
-        if (authorities.contains("ADMIN")) return "/admin";
-        if (authorities.contains("USER")) return "/user";
-        return "/";
+        if (authorities.contains("ROLE_ADMIN")) return "/admin";
+        if (authorities.contains("ROLE_USER")) return "/user";
+        return "/login";
     }
 }

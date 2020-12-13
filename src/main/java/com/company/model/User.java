@@ -115,11 +115,11 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    public String getRolesString() {
-        StringBuilder str = new StringBuilder();
-        for (Role role : roles) {
-            str.append(role.getName()).append(" ");
-        }
-        return str.toString();
-    }
+//    public String getRolesString() {
+//        StringBuilder str = new StringBuilder();
+//        for (Role role : roles) {
+//            str.append(role.getName()).append(" ");
+//        }
+//        return str.toString();
+//    }
 }
